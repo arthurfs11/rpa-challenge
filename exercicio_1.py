@@ -17,6 +17,7 @@ planilha_work = planilha['Sheet1'] # ATRIBUI A PLANILHA SHEET1 (ONDE ESTÃO AS I
 driver.get('https://www.rpachallenge.com/') # ABRE O LINK DO DESAFIO
 time.sleep(5) # AGUARDA 5 SEGUNDOS PARA A PÁGINA CARREGAR
 driver.find_element(By.XPATH, "//button[contains(text(),'Start')]").click() # CLICA NO BOTÃO START
+time.sleep(1) # AGUARDA 1 SEGUNDO PARA INICIAR O DESAFIO
 
 # PASSO 4 - CADASTRAR INFORMAÇÕES
 for i in planilha_work.iter_rows(min_row=2, values_only=True):
@@ -29,3 +30,6 @@ for i in planilha_work.iter_rows(min_row=2, values_only=True):
     driver.find_element(By.XPATH, "//input[@ng-reflect-name='labelPhone']").send_keys(i[6]) # PREENCHE O TELEFONE
     driver.find_element(By.XPATH, "/html/body/app-root/div[2]/app-rpa1/div/div[2]/form/input").click() # CLICA EM SUBMIT
 
+# PASSO 5 - OBTER O RESULTADO E EXIBIR O TEMPO QUE LEVOU PARA CADASTRAR
+resultado = driver.find_element(By.XPATH, "/html/body/app-root/div[2]/app-rpa1/div/div[2]/div[2]").get_attribute('InnerHTML') # OBTEM O RESULTADO
+print(resultado)
